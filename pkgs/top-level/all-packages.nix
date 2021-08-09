@@ -24384,6 +24384,8 @@ with pkgs;
 
   gjay = callPackage ../applications/audio/gjay { };
 
+  sherlock = callPackage ../tools/security/sherlock { };
+
   photivo = callPackage ../applications/graphics/photivo { };
 
   rhythmbox = callPackage ../applications/audio/rhythmbox { };
