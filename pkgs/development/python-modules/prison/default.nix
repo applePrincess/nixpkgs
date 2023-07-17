@@ -7,13 +7,13 @@
 
 buildPythonPackage rec {
   pname = "prison";
-  version = "0.1.3";
+  version = "unstable-2021-08-26";
 
   src = fetchFromGitHub {
     owner = "betodealmeida";
     repo = "python-rison";
-    rev = version;
-    hash = "sha256-qor40vUQeTdlO3vwug3GGNX5vkNaF0H7EWlRdsY4bvc=";
+    rev = "b77e5bc7cb1a198f2cbf0366bf9acc10b8e67dd5";
+    hash = "sha256-aCQ2254appVBsKuJgSeraWWyh1d9rt8KDt/f8afpVwo=";
   };
 
   propagatedBuildInputs = [
