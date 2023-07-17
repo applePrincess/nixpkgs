@@ -1841,6 +1841,8 @@ with pkgs;
 
   supermin = callPackage ../tools/virtualization/supermin { };
 
+  superset = callPackage ../servers/superset { };
+
   sx-go = callPackage ../tools/security/sx-go { };
 
   systeroid = callPackage ../tools/system/systeroid { };
