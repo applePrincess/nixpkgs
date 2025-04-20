@@ -15011,6 +15011,8 @@ self: super: with self; {
 
   rflink = callPackage ../development/python-modules/rflink { };
 
+  rhoknp = callPackage ../development/python-modules/rhoknp { };
+
   rich = callPackage ../development/python-modules/rich { };
 
   rich-argparse = callPackage ../development/python-modules/rich-argparse { };
