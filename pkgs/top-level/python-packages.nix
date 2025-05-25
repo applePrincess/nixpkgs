@@ -4881,6 +4881,8 @@ self: super: with self; {
     }
   );
 
+  faust-streaming = callPackage ../development/python-modules/faust-streaming { };
+
   faust-cchardet = callPackage ../development/python-modules/faust-cchardet { };
 
   favicon = callPackage ../development/python-modules/favicon { };
@@ -9086,6 +9088,8 @@ self: super: with self; {
   modbus-tk = callPackage ../development/python-modules/modbus-tk { };
 
   moddb = callPackage ../development/python-modules/moddb { };
+
+  mode-streaming = callPackage ../development/python-modules/mode-streaming { };
 
   model-bakery = callPackage ../development/python-modules/model-bakery { };
 
