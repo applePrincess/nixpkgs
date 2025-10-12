@@ -1,0 +1,12 @@
+diff --git a/tools/snow-chibi b/tools/snow-chibi
+index 54cf4a0f..b50ceb64 100755
+--- a/tools/snow-chibi
++++ b/tools/snow-chibi
+@@ -1,6 +1,6 @@
+ #!/bin/sh
+ 
+-CHIBI=${CHIBI:-chibi-scheme}
++CHIBI=@chibi-scheme@
+ IMG=-isnow.img
+ if [ -x ./chibi-scheme ] && ! type $CHIBI >/dev/null 2>/dev/null; then
+     # convenience for running from dev, notable "make test-snow"

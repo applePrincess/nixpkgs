@@ -28,6 +28,7 @@ stdenv.mkDerivation rec {
 
   patches = [
     ./faketime.patch
+    ./chibi-scheme-placeholder.patch
   ];
 
 
@@ -36,10 +37,14 @@ stdenv.mkDerivation rec {
       --prefix CHIBI_MODULE_PATH : "$out/share/chibi:$out/lib/chibi" \
       ${lib.optionalString stdenv.hostPlatform.isDarwin "--prefix DYLD_LIBRARY_PATH : $out/lib"}
 
-    for f in chibi-doc chibi-ffi snow-chibi; do
+    for f in chibi-doc chibi-ffi; do
       substituteInPlace "$out/bin/$f" \
-        --replace "/usr/bin/env chibi-scheme" "$out/bin/chibi-scheme"
+        --replace-fail "/usr/bin/env chibi-scheme" "$out/bin/chibi-scheme"
     done
+
+     substituteInPlace "$out/bin/snow-chibi" \
+       --replace-fail "@chibi-scheme@" "$out/bin/chibi-scheme"
+
   '';
 
   meta = {
