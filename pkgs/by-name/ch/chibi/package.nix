@@ -3,6 +3,7 @@
   stdenv,
   fetchFromGitHub,
   makeWrapper,
+  libfaketime,
 }:
 
 stdenv.mkDerivation rec {
@@ -16,11 +17,19 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-i+xiaYwM7a+0T824VSuh7UUNI6HV9KpqzQPE1WAZ+As=";
   };
 
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [
+    makeWrapper
+    libfaketime
+  ];
 
   makeFlags = [
     "PREFIX=${placeholder "out"}"
   ];
+
+  patches = [
+    ./faketime.patch
+  ];
+
 
   fixupPhase = ''
     wrapProgram "$out/bin/chibi-scheme" \

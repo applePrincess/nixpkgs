@@ -1,0 +1,17 @@
+diff --git a/Makefile b/Makefile
+index 65c3e8cb..eb596ffd 100644
+--- a/Makefile
++++ b/Makefile
+@@ -418,9 +418,9 @@ install-base: all
+ install: install-base
+ ifneq "$(IMAGE_FILES)" ""
+ 	echo "Generating images"
+-	-[ -z "$(DESTDIR)" ] && LD_LIBRARY_PATH="$(SOLIBDIR):$(LD_LIBRARY_PATH)" DYLD_LIBRARY_PATH="$(SOLIBDIR):$(DYLD_LIBRARY_PATH)" CHIBI_MODULE_PATH="$(MODDIR):$(BINMODDIR)" $(BINDIR)/chibi-scheme$(EXE) -mchibi.repl -d $(MODDIR)/chibi.img
+-	-[ -z "$(DESTDIR)" ] && LD_LIBRARY_PATH="$(SOLIBDIR):$(LD_LIBRARY_PATH)" DYLD_LIBRARY_PATH="$(SOLIBDIR):$(DYLD_LIBRARY_PATH)" CHIBI_MODULE_PATH="$(MODDIR):$(BINMODDIR)" $(BINDIR)/chibi-scheme$(EXE) -xscheme.red -mchibi.repl -d $(MODDIR)/red.img
+-	-[ -z "$(DESTDIR)" ] && LD_LIBRARY_PATH="$(SOLIBDIR):$(LD_LIBRARY_PATH)" DYLD_LIBRARY_PATH="$(SOLIBDIR):$(DYLD_LIBRARY_PATH)" CHIBI_MODULE_PATH="$(MODDIR):$(BINMODDIR)" $(BINDIR)/chibi-scheme$(EXE) -mchibi.snow.commands -mchibi.snow.interface -mchibi.snow.package -mchibi.snow.utils -d $(DESTDIR)$(MODDIR)/snow.img
++	-[ -z "$(DESTDIR)" ] && LD_LIBRARY_PATH="$(SOLIBDIR):$(LD_LIBRARY_PATH)" DYLD_LIBRARY_PATH="$(SOLIBDIR):$(DYLD_LIBRARY_PATH)" CHIBI_MODULE_PATH="$(MODDIR):$(BINMODDIR)" faketime -f "1970-01-01 00:00:01" $(BINDIR)/chibi-scheme$(EXE) -mchibi.repl -d $(MODDIR)/chibi.img
++	-[ -z "$(DESTDIR)" ] && LD_LIBRARY_PATH="$(SOLIBDIR):$(LD_LIBRARY_PATH)" DYLD_LIBRARY_PATH="$(SOLIBDIR):$(DYLD_LIBRARY_PATH)" CHIBI_MODULE_PATH="$(MODDIR):$(BINMODDIR)" faketime -f "1970-01-01 00:00:01" $(BINDIR)/chibi-scheme$(EXE) -xscheme.red -mchibi.repl -d $(MODDIR)/red.img
++	-[ -z "$(DESTDIR)" ] && LD_LIBRARY_PATH="$(SOLIBDIR):$(LD_LIBRARY_PATH)" DYLD_LIBRARY_PATH="$(SOLIBDIR):$(DYLD_LIBRARY_PATH)" CHIBI_MODULE_PATH="$(MODDIR):$(BINMODDIR)" faketime -f "1970-01-01 00:00:01" $(BINDIR)/chibi-scheme$(EXE) -mchibi.snow.commands -mchibi.snow.interface -mchibi.snow.package -mchibi.snow.utils -d $(DESTDIR)$(MODDIR)/snow.img
+ endif
+ 
+ uninstall:
