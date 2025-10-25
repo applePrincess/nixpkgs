@@ -24,13 +24,21 @@ stdenv.mkDerivation rec {
 
   makeFlags = [
     "PREFIX=${placeholder "out"}"
-  ];
+  ]
+  # ++ lib.optional (!stdenv.hostPlatform.isStatic) [
+  #   "STATICFLAGS="
+  #   "SEXP_USE_DL=1"
+  # ]
+  ;
 
   patches = [
     ./faketime.patch
     ./chibi-scheme-placeholder.patch
+    ./print_gc_heap.patch
   ];
 
+  checkTarget = "test-dist";
+  # doCheck = true;
 
   fixupPhase = ''
     wrapProgram "$out/bin/chibi-scheme" \

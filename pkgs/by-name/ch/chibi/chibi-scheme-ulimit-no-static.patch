@@ -1,0 +1,13 @@
+diff --git a/Makefile b/Makefile
+index 65c3e8cb..323745b7 100644
+--- a/Makefile
++++ b/Makefile
+@@ -145,7 +145,7 @@ chibi-scheme-static$(EXE): main.o $(SEXP_OBJS) $(EVAL_OBJS)
+ 	$(CC) $(XCFLAGS) $(STATICFLAGS) -o $@ $^ $(LDFLAGS) $(GCLDFLAGS) $(STATIC_LDFLAGS)
+ 
+ chibi-scheme-ulimit$(EXE): main.o $(SEXP_ULIMIT_OBJS) $(EVAL_OBJS)
+-	$(CC) $(XCFLAGS) $(STATICFLAGS) -o $@ $^ $(LDFLAGS) $(GCLDFLAGS) $(STATIC_LDFLAGS)
++	$(CC) $(XCPPFLAGS) $(XCFLAGS) $(LDFLAGS) -o $@ $< -L. $(RLDFLAGS)
+ 
+ clibs.c: $(GENSTATIC) $(CHIBI_DEPENDENCIES) $(COMPILED_LIBS:%$(SO)=%.c)
+ 	if [ -d .git ]; then \

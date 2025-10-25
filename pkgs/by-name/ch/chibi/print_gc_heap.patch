@@ -1,0 +1,29 @@
+diff --git a/gc_heap.c b/gc_heap.c
+index eb5a55a1..ffeaf742 100644
+--- a/gc_heap.c
++++ b/gc_heap.c
+@@ -334,6 +334,7 @@ sexp sexp_gc_heap_pack(sexp ctx_src, sexp_uint_t heap_free_size) {
+     res = sexp_gc_heap_walk(ctx_src, heaps[i],
+                             sexp_context_types(ctx_src), sexp_context_num_types(ctx_src),
+                             &state, heap_callback_remap, NULL, sexp_callback_remap);
++    printf("; remap heap %d %p walk heap_pack", i, heaps[i]);
+     if (!(res == SEXP_TRUE || res == SEXP_NULL)) { 
+       size_t sz = strlen(gc_heap_err_str);
+       snprintf(gc_heap_err_str + sz, ERR_STR_SIZE - sz, "; remap heap %d %p walk heap_pack", i, heaps[i]);
+@@ -391,6 +392,7 @@ sexp sexp_save_image (sexp ctx_in, const char* filename) {
+   
+   /* Save ONLY packed, active SEXPs.  No free list structures or padding. */
+   sexp ctx_out = sexp_gc_heap_pack(ctx_in, 0);
++  printf("CTX_OUT: %p, is context? %d\n", ctx_out, sexp_contextp(ctx_out));
+   if (!ctx_out || !sexp_contextp(ctx_out)) {
+     goto done;
+   }
+@@ -398,6 +400,8 @@ sexp sexp_save_image (sexp ctx_in, const char* filename) {
+   sexp   base = sexp_heap_first_block(heap);
+   size_t pad  = (size_t)((unsigned char *)base - (unsigned char *)heap->data);
+   size_t size = heap->size - pad;
++  printf("HEAP: %p\n", heap);
++  printf("BASE: %p, pad: %d, size: %d\n", base, pad, size);
+   
+   struct sexp_image_header_t header;
+   memcpy(&header.magic, SEXP_IMAGE_MAGIC, sizeof(header.magic));
