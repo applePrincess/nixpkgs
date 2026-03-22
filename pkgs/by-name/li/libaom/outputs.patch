@@ -1,19 +1,19 @@
 diff --git a/build/cmake/aom_install.cmake b/build/cmake/aom_install.cmake
-index 0bd2bf035..5cf5acea8 100644
+index 4291782da1..954ed9e520 100644
 --- a/build/cmake/aom_install.cmake
 +++ b/build/cmake/aom_install.cmake
-@@ -42,8 +42,8 @@ macro(setup_aom_install_targets)
+@@ -43,8 +43,8 @@ macro(setup_aom_install_targets)
                -DAOM_ROOT=${AOM_ROOT}
                -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
                -DCMAKE_INSTALL_BINDIR=${CMAKE_INSTALL_BINDIR}
 -              -DCMAKE_INSTALL_INCLUDEDIR=${CMAKE_INSTALL_INCLUDEDIR}
 -              -DCMAKE_INSTALL_LIBDIR=${CMAKE_INSTALL_LIBDIR}
-+              -DCMAKE_INSTALL_FULL_INCLUDEDIR=${CMAKE_INSTALL_FULL_INCLUDEDIR}
-+              -DCMAKE_INSTALL_FULL_LIBDIR=${CMAKE_INSTALL_FULL_LIBDIR}
++              -DCMAKE_INSTALL_FULL_INCLUDEDIR=${CMAKE_INSTALL_INCLUDEDIR}
++              -DCMAKE_INSTALL_FULL_LIBDIR=${CMAKE_INSTALL_LIBDIR}
                -DCMAKE_PROJECT_NAME=${CMAKE_PROJECT_NAME}
+               -DCMAKE_THREAD_LIBS_INIT=${CMAKE_THREAD_LIBS_INIT}
                -DCONFIG_MULTITHREAD=${CONFIG_MULTITHREAD}
-               -DCONFIG_TUNE_VMAF=${CONFIG_TUNE_VMAF}
-@@ -84,12 +84,12 @@ macro(setup_aom_install_targets)
+@@ -113,13 +113,13 @@ macro(setup_aom_install_targets)
      # Setup the install rules. install() will automatically prepend
      # CMAKE_INSTALL_PREFIX to relative paths
      install(FILES ${AOM_INSTALL_INCS}
@@ -23,6 +23,7 @@ index 0bd2bf035..5cf5acea8 100644
 -            DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
 +            DESTINATION "${CMAKE_INSTALL_FULL_LIBDIR}/pkgconfig")
      install(TARGETS ${AOM_INSTALL_LIBS};${AOM_INSTALL_BINS}
+             EXPORT "${AOM_TARGETS_EXPORT_NAME}"
 -            RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
 -            LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
 -            ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}")
@@ -32,11 +33,11 @@ index 0bd2bf035..5cf5acea8 100644
    endif()
  endmacro()
 diff --git a/build/cmake/pkg_config.cmake b/build/cmake/pkg_config.cmake
-index e8fff2e77..b8a73aad4 100644
+index 88a33a58a6..ec3bdce046 100644
 --- a/build/cmake/pkg_config.cmake
 +++ b/build/cmake/pkg_config.cmake
 @@ -11,8 +11,8 @@
- cmake_minimum_required(VERSION 3.5)
+ cmake_minimum_required(VERSION 3.16)
  
  set(REQUIRED_ARGS "AOM_ROOT" "AOM_CONFIG_DIR" "CMAKE_INSTALL_PREFIX"
 -                  "CMAKE_INSTALL_BINDIR" "CMAKE_INSTALL_INCLUDEDIR"
