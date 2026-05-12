@@ -20,6 +20,10 @@ buildPythonPackage rec {
     hash = "sha256-1MUWjFFitJ3nqvVwAQYcAVVPhPs6NEgq7t/mI71u2Bk=";
   };
 
+  patches = [
+    ./patch
+  ];
+
   build-system = [ setuptools ];
 
   nativeCheckInputs = [
