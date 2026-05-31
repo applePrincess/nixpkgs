@@ -8424,6 +8424,8 @@ self: super: with self; {
 
   kicadcliwrapper = callPackage ../development/python-modules/kicadcliwrapper { };
 
+  kinet2pcb = callPackage ../development/python-modules/kinet2pcb { };
+
   kinparse = callPackage ../development/python-modules/kinparse { };
 
   kiosker-python-api = callPackage ../development/python-modules/kiosker-python-api { };
