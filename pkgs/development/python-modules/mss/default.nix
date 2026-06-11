@@ -12,6 +12,7 @@
   libxrandr,
   libxfixes,
   libx11,
+  libxcb,
 
   # tests
   lsof,
@@ -25,12 +26,12 @@
 
 buildPythonPackage rec {
   pname = "mss";
-  version = "10.1.0";
+  version = "10.2.0";
   pyproject = true;
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-cYK69+4WylaeKAQCi2q5vL9r5cRvwogIQPM7UTuctPg=";
+    hash = "sha256-qycYYHdVReYvKdexH4LyeawQSPW73SbPrYSDAgjb05M=";
   };
 
   patches = lib.optionals stdenv.hostPlatform.isLinux [
@@ -38,10 +39,21 @@ buildPythonPackage rec {
       x11 = "${libx11}/lib/libX11.so";
       xfixes = "${libxfixes}/lib/libXfixes.so";
       xrandr = "${libxrandr}/lib/libXrandr.so";
+      xcb = "${libxcb}/lib/libxcb.so";
+      xcb-randr = "${libxcb}/lib/libxcb-randr.so";
+      xcb-render = "${libxcb}/lib/libxcb-render.so";
+      xcb-shm = "${libxcb}/lib/libxcb-shm.so";
+      xcb-xfixes = "${libxcb}/lib/libxcb-xfixes.so";
     })
   ];
 
   build-system = [ hatchling ];
+
+  buildInputs = [
+    libx11
+    libxfixes
+    libxrandr
+  ];
 
   doCheck = stdenv.hostPlatform.isLinux;
 
