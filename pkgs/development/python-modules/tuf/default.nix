@@ -19,14 +19,14 @@
 
 buildPythonPackage (finalAttrs: {
   pname = "tuf";
-  version = "6.0.0";
+  version = "7.0.0";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "theupdateframework";
     repo = "python-tuf";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-CPbZOpUYi7MWKLMj7kwTsmEkxLCf4wU7IOCcbzMkPlU=";
+    hash = "sha256-pn1M3e3Vzu2CYp/3KXkreaHunr+Nblph0QBWAkTmrIE=";
   };
 
   postPatch = ''
@@ -35,7 +35,6 @@ buildPythonPackage (finalAttrs: {
   '';
 
   build-system = [
-    flit-core
     hatchling
   ];
 
@@ -49,7 +48,6 @@ buildPythonPackage (finalAttrs: {
   __darwinAllowLocalNetworking = true;
 
   nativeCheckInputs = [
-    ed25519
     freezegun
     pytestCheckHook
   ];
