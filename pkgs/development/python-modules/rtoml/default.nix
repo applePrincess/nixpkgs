@@ -43,10 +43,10 @@ buildPythonPackage rec {
 
   pytestFlags = [ "--benchmark-disable" ];
 
-  disabledTests = [
-    # TypeError: loads() got an unexpected keyword argument 'name'
-    "test_load_data_toml"
-  ];
+  # disabledTests = [
+  #   # TypeError: loads() got an unexpected keyword argument 'name'
+  #   "test_load_data_toml"
+  # ];
 
   preCheck = ''
     rm -rf rtoml
