@@ -16,12 +16,12 @@
 }:
 
 let
-  version = "4.3.0";
+  version = "4.15.3";
   zitadelRepo = fetchFromGitHub {
     owner = "zitadel";
     repo = "zitadel";
     rev = "v${version}";
-    hash = "sha256-4jtSxdgXnSqtp7lvNg63TiPHrviWTxb+U9olRufBz5w=";
+    hash = "sha256-E1tkEunLFWxP1HYe412ZZVL1qaBr2Y52sCEJ6DPr9Rw=";
     # populate values that require us to use git. By doing this in postFetch we
     # can delete .git afterwards and maintain better reproducibility of the src.
     leaveDotGit = true;
@@ -32,7 +32,7 @@ let
       find "$out" -name .git -print0 | xargs -0 rm -rf
     '';
   };
-  goModulesHash = "sha256-IiI8le1u4+Rm534lX0X9Qdb8zr6TX6AwX70WOX24oA0=";
+  goModulesHash = "sha256-G2PsP9Lhfzz0zL2VUJZxn5RKQmNqf6Q3vFgEHuJwam0=";
 
   buildZitadelProtocGen =
     name:
@@ -75,7 +75,6 @@ let
       inherit version;
 
       src = zitadelRepo;
-      patches = [ ./console-use-local-protobuf-plugins.patch ];
 
       nativeBuildInputs = nativeBuildInputs ++ [
         buf
@@ -108,7 +107,7 @@ let
       protoc-gen-zitadel
     ];
     outputPath = ".artifacts";
-    hash = "sha256-8t5uKmvcHIGor+ib5Q1jJagF3W/iLtZfKEUzbSaN0bw=";
+    hash = "sha256-Mg9xAxT1gqJDoo9Rr5Me9ekfIUZrnEElEAkc5Q89u10=";
   };
 in
 buildGoModule rec {

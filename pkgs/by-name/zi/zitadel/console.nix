@@ -7,10 +7,11 @@
 {
   lib,
   stdenv,
-  pnpm,
+  pnpm_10,
   nodejs,
   grpc-gateway,
   protoc-gen-connect-go,
+  protoc-gen-es,
   protoc-gen-grpc-web,
   buf,
   fetchFromGitHub,
@@ -22,6 +23,7 @@
 }:
 
 let
+  pnpm = pnpm_10;
   protobufGenerated = generateProtobufCode {
     pname = "zitadel-console";
     nativeBuildInputs = [
@@ -33,15 +35,18 @@ let
     workDir = "console";
     bufArgs = "../proto --include-imports --include-wkt";
     outputPath = "src/app/proto";
-    hash = "sha256-A78to2uARzVvXLMxvZpvm7CLhZM45DaDycGjX/ZvBus=";
+    hash = "sha256-i1zLBvjjqjW8xnptdX802LlO64lAxEX37J9zb9eNjUo=";
   };
 
   zitadelProtobufGenerated = generateProtobufCode {
     pname = "zitadel-proto";
+    nativeBuildInputs = [
+      protoc-gen-es
+    ];
     workDir = "packages/zitadel-proto";
     bufArgs = "../../proto";
     outputPath = ".";
-    hash = "sha256-baPS1wbsUQzelI55zswTPvX7ojXbPts967lwgcZGvlE=";
+    hash = "sha256-spkzGK06OadgF4teZTKhJWBHwNMD1CJxIxzGgPM4UKk=";
   };
 
   client = stdenv.mkDerivation (finalAttrs: {
@@ -51,8 +56,9 @@ let
 
     pnpmDeps = fetchPnpmDeps {
       inherit (finalAttrs) pname version src;
+      inherit pnpm;
       fetcherVersion = 4;
-      hash = "sha256-3CBJpCcQYp6UzIecE7vQK+iqbhmfrESaH6dVf0yRMzU=";
+      hash = "sha256-YzyfmKXqhIz8aqsX9X9yeCMJ55V1b2Ry3rFOkQLhz84=";
     };
 
     pnpmWorkspaces = [
@@ -92,6 +98,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   pnpmDeps = fetchPnpmDeps {
     inherit (finalAttrs) pname version src;
+    inherit pnpm;
     fetcherVersion = 4;
     hash = "sha256-3CBJpCcQYp6UzIecE7vQK+iqbhmfrESaH6dVf0yRMzU=";
   };
