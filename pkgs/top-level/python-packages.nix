@@ -8815,6 +8815,8 @@ self: super: with self; {
 
   keystoneauth1 = callPackage ../development/python-modules/keystoneauth1 { };
 
+  keystonemiddleware = callPackage ../development/python-modules/keystonemiddleware { };
+
   keyutils = callPackage ../development/python-modules/keyutils { inherit (pkgs) keyutils; };
 
   kfactory = callPackage ../development/python-modules/kfactory { };
@@ -12574,6 +12576,8 @@ self: super: with self; {
 
   oslex = callPackage ../development/python-modules/oslex { };
 
+  oslo-cache = callPackage ../development/python-modules/oslo-cache { };
+
   oslo-concurrency = callPackage ../development/python-modules/oslo-concurrency { };
 
   oslo-config = callPackage ../development/python-modules/oslo-config { };
@@ -12585,6 +12589,8 @@ self: super: with self; {
   oslo-i18n = callPackage ../development/python-modules/oslo-i18n { };
 
   oslo-log = callPackage ../development/python-modules/oslo-log { };
+
+  oslo-messaging = callPackage ../development/python-modules/oslo-messaging { };
 
   oslo-metrics = callPackage ../development/python-modules/oslo-metrics { };
 
@@ -14141,6 +14147,8 @@ self: super: with self; {
   pybuildkite = callPackage ../development/python-modules/pybuildkite { };
 
   pybullet = callPackage ../development/python-modules/pybullet { };
+
+  pycadf = callPackage ../development/python-modules/pycadf { };
 
   pycairo = callPackage ../development/python-modules/pycairo { inherit (pkgs.buildPackages) meson; };
 

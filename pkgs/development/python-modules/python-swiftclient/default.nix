@@ -6,7 +6,10 @@
   setuptools,
   installShellFiles,
 
-  # direct
+  # direct deps
+  requests,
+
+  # optional dependencies
   python-keystoneclient,
 
   # tests
@@ -52,8 +55,12 @@ buildPythonPackage (finalAttrs: {
   sphinxBuilders = [ "man" ];
 
   dependencies = [
-    python-keystoneclient
+    requests
   ];
+
+  optional-dependencies = {
+    keystone = [ python-keystoneclient ];
+  };
 
   nativeCheckInputs = [
     stestrCheckHook
@@ -62,6 +69,7 @@ buildPythonPackage (finalAttrs: {
     keystoneauth1
     stestr
     openstacksdk
+    python-keystoneclient
   ];
 
   nativeInstallCheckInputs = [ versionCheckHook ];

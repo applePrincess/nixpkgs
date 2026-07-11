@@ -18,8 +18,12 @@
   setuptools,
   six,
   stestr,
-  swiftclient,
+  python-swiftclient,
   xattr,
+  pytestCheckHook,
+  requests-mock,
+
+  python-keystoneclient,
 }:
 
 buildPythonPackage (finalAttrs: {
@@ -56,24 +60,28 @@ buildPythonPackage (finalAttrs: {
     libredirect.hook
     mock
     stestr
-    swiftclient
-  ];
+    python-swiftclient
+    requests-mock
+    pytestCheckHook
+    python-keystoneclient
+  ] ++ python-swiftclient.passthru.optional-dependencies.keystone;
+
 
   postInstall = ''
     installManPage doc/manpages/*
   '';
 
   # a lot of tests currently fail while establishing a connection
-  doCheck = false;
+  # doCheck = true;
 
-  checkPhase = ''
-    echo "nameserver 127.0.0.1" > resolv.conf
-    export NIX_REDIRECTS=/etc/protocols=${iana-etc}/etc/protocols:/etc/resolv.conf=$(realpath resolv.conf)
+  # checkPhase = ''
+  #   echo "nameserver 127.0.0.1" > resolv.conf
+  #   export NIX_REDIRECTS=/etc/protocols=${iana-etc}/etc/protocols:/etc/resolv.conf=$(realpath resolv.conf)
 
-    export SWIFT_TEST_CONFIG_FILE=test/sample.conf
+  #   export SWIFT_TEST_CONFIG_FILE=test/sample.conf
 
-    stestr run
-  '';
+  #   stestr run
+  # '';
 
   pythonImportsCheck = [ "swift" ];
 
