@@ -32,6 +32,14 @@ stdenv.mkDerivation (finalAttrs: {
     validatePkgConfig
   ];
 
+  cmakeFlags = lib.optional stdenv.hostPlatform.isStatic [
+    "-DHDR_HISTOGRAM_BUILD_SHARED=OFF"
+    "-DHDR_HISTOGRAM_BUILD_STATIC=ON"
+    "-DHDR_HISTOGRAM_INSTALL_SHARED=OFF"
+    "-DHDR_HISTOGRAM_INSTALL_STATIC=ON"
+    "-DHDR_HISTOGRAM_BUILD_PROGRAMS=OFF"
+  ];
+
   doCheck = true;
 
   passthru = {
